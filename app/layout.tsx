@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex min-h-screen flex-col text-white`}
       >
-        <div className='flex flex-grow flex-col justify-center px-8'>
+        <div className='flex flex-grow flex-col justify-center px-8 z-10'>
           {children}
         </div>
         <Footer />
