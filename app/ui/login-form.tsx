@@ -8,9 +8,7 @@ export default function LoginForm() {
   return (
     <form className='space-y-3'>
       <div className='flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8'>
-        <h1 className="mb-3 text-2xl">
-          Please log in to continue.
-        </h1>
+        <h1 className='mb-3 text-2xl'>Please log in to continue.</h1>
         <div className='w-full'>
           <div>
             <label
@@ -51,15 +49,15 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
-               <div
-                 className="flex h-8 items-end space-x-1"
-                 aria-live="polite"
-                 aria-atomic="true"
-               >
-                   <>
-                     <p className="text-sm text-red-500">error message</p>
-                   </>
-               </div>
+        <div
+          className='flex h-8 items-end space-x-1'
+          aria-live='polite'
+          aria-atomic='true'
+        >
+          <>
+            <p className='text-sm text-red-500'>error message</p>
+          </>
+        </div>
       </div>
     </form>
   );
@@ -68,9 +66,5 @@ export default function LoginForm() {
 function LoginButton() {
   const { pending } = useFormStatus();
 
-  return (
-    <Button className="mt-4 w-full">
-      Log in
-    </Button>
-  );
+  return <Button className='mt-4 w-full'>Log in</Button>;
 }

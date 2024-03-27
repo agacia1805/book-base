@@ -3,12 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    #140a42
-  )
-  #0a071a;
+  background: linear-gradient(to bottom, transparent, #140a42) #0a071a;
 }
 
 body::before {
