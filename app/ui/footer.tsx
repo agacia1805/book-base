@@ -23,7 +23,7 @@ export default function Footer() {
             <a
               key={item.name}
               href={item.href}
-              className='text-gray-400 hover:text-gray-400'
+              className='text-white hover:text-gray-400'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -33,7 +33,7 @@ export default function Footer() {
           ))}
         </div>
         <div className='mt-4 md:order-1 md:mt-0'>
-          <p className='text-center text-xs leading-5 text-gray-400'>
+          <p className='text-center text-xs leading-5 text-white'>
             {new Date().getFullYear()} © Copyright Pinehead Coder
           </p>
         </div>

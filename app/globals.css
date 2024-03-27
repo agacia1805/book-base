@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background: linear-gradient(to bottom, #141862, #140A42, #0A071A);
-}
-
 body {
   background: linear-gradient(
-    180deg,
-    hsl(235, 16%, 14%) 0%,
-    hsl(230, 17%, 10%) 100%
+    to bottom,
+    transparent,
+    #140a42
   )
-  hsl(235, 16%, 14%) 0%;
+  #0a071a;
 }
 
 body::before {

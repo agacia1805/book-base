@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'BookBase app',
-  description: 'BookBase app for cataloging all your favourite books in one place',
+  description:
+    'BookBase app for cataloging all your favourite books in one place',
 };
 
 export default function RootLayout({
@@ -20,9 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex min-h-screen flex-col text-white`}
       >
-        <div className='flex flex-grow flex-col justify-center px-8 z-10'>
-          {children}
-        </div>
+        <div className='z-10 flex flex-grow px-4'>{children}</div>
         <Footer />
       </body>
     </html>
