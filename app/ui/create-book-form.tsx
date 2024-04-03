@@ -1,10 +1,15 @@
 'use client';
 
 import { Button } from './button';
+import { createBook } from '@/app/lib/actions';
+import { useFormState } from 'react-dom';
 
-export default function LoginForm() {
+export default function CreateBookForm() {
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(createBook, initialState);
+
   return (
-    <form className='space-y-3'>
+    <form className='space-y-3' action={dispatch}>
       <div className='flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8'>
         <h1 className='mb-3 text-2xl'>Please log in to continue.</h1>
         <div className='w-full'>
@@ -17,7 +22,7 @@ export default function LoginForm() {
             </label>
             <div className='relative'>
               <input
-                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm outline-2 placeholder:text-gray-500'
+                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500'
                 id='title'
                 type='text'
                 name='title'
@@ -35,7 +40,7 @@ export default function LoginForm() {
             </label>
             <div className='relative'>
               <input
-                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm outline-2 placeholder:text-gray-500'
+                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500'
                 id='author'
                 type='text'
                 name='author'
@@ -53,7 +58,7 @@ export default function LoginForm() {
             </label>
             <div className='relative'>
               <input
-                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm outline-2 placeholder:text-gray-500'
+                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500'
                 id='description'
                 type='text'
                 name='description'
@@ -63,7 +68,9 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className='mt-4 flex w-full justify-center'>Save book</Button>{' '}
+        <Button className='mt-4 flex w-full justify-center' type='submit'>
+          Save book
+        </Button>
         <div
           className='flex h-8 items-end space-x-1'
           aria-live='polite'
