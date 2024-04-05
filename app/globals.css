@@ -36,3 +36,43 @@ body::after {
     text-wrap: balance;
   }
 }
+
+.glitter-bg {
+  background: linear-gradient(45deg, #77d1f8, #ff77ff, #7acdf1, #ff7eff);
+}
+
+.create-book-popover {
+  transform: translateY(-80px);
+  opacity: 0;
+  transition-property: transform, opacity, display;
+  transition-duration: 0.7s;
+  transition-behavior: allow-discrete;
+}
+
+.create-book-popover:popover-open {
+  @starting-style {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tag-checkbox {
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.tag-checkbox input[type='checkbox'] {
+  display: none;
+}
+
+.tag-checkbox:checked {
+  background-color: #007bff;
+  color: white;
+}
+
+.tag-checkbox:checked:hover {
+  background-color: #0056b3;
+}
