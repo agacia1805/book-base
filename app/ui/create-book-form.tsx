@@ -64,7 +64,7 @@ export default function CreateBookForm() {
                 className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500 focus-visible:outline-gray-300'
                 id='title'
                 name='title'
-                placeholder='Book title'
+                placeholder='Title'
                 required
               />
             </div>
@@ -148,21 +148,21 @@ export default function CreateBookForm() {
             <legend className='mb-2 block text-xs font-medium'>Genre(s)</legend>
             <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2'>
               {genres.map((genre) => (
-                <label
-                  key={genre}
-                  htmlFor={genre}
-                  className='tag-checkbox flex cursor-pointer items-center rounded-full bg-gray-200 hover:bg-gray-300 px-2 py-1 m-1 text-xs font-medium text-gray-600 cursor-pointer'
-                >
-                  <input
-                    id={genre}
-                    name='genre'
-                    type='checkbox'
-                    value={genre}
-                    className=''
-                    aria-describedby='status-error'
-                  />
-                  {genre}
-                </label>
+                <div key={genre} className="tag-checkbox">
+                      <input
+                        id={genre}
+                        name='genre'
+                        type='checkbox'
+                        value={genre}
+                        aria-describedby='status-error'
+                      />
+                      <label
+                        htmlFor={genre}
+                        className='flex select-none cursor-pointer items-center rounded-full bg-gray-200 hover:bg-gray-300 px-2 py-1 m-1 text-xs font-medium text-gray-600 cursor-pointer'
+                      >
+                        {genre}
+                      </label>
+                    </div>
               ))}
             </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
