@@ -68,11 +68,7 @@ body::after {
   display: none;
 }
 
-.tag-checkbox:checked {
-  background-color: #007bff;
-  color: white;
-}
-
-.tag-checkbox:checked:hover {
-  background-color: #0056b3;
+.tag-checkbox input[type="checkbox"]:checked + label {
+  background-color: #9CA3AFFF;
+  color: #091231FF;
 }
