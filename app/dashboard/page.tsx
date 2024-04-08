@@ -2,6 +2,19 @@ import CreateBookForm from '@/app/ui/create-book-form';
 import { Button } from '@/app/ui/button';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
+declare module 'react' {
+  interface HTMLAttributes<T> {
+    popover?: string;
+  }
+}
+
+declare module 'react' {
+  interface ButtonHTMLAttributes<T> {
+    popovertarget?: string;
+    popovertargetaction?: string;
+  }
+}
+
 export default function Page() {
   return (
     <main className='flex w-full p-6'>

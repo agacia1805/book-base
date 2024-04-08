@@ -62,8 +62,7 @@ export async function createBook(prevState: State, formData: FormData) {
       message: 'Database Error: Failed to create book.',
     };
   }
-
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the dashboard page and redirect the user.
   revalidatePath('/dashboard');
   // redirect('/dashboard');
 }
