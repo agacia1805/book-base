@@ -4,17 +4,18 @@ import { useState } from 'react';
 import { Button } from './button';
 import { createBook } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
-import { Rating } from '@smastrom/react-rating';
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 export default function CreateBookForm() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createBook, initialState);
 
-  const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState<number>(0);
 
-  function onChange(newValue: number) {
-    setRating(newValue);
-  }
+    function onChange(newValue: number) {
+      setRating(newValue);
+    }
 
   const genres = [
     'memoir/autobiography',
@@ -111,7 +112,7 @@ export default function CreateBookForm() {
             </label>
             <div className='relative'>
               <textarea
-                className='peer block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500 focus-visible:outline-gray-300'
+                className='peer h-[120px] block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500 focus-visible:outline-gray-300'
                 id='description'
                 name='description'
                 placeholder='Description'
@@ -134,7 +135,14 @@ export default function CreateBookForm() {
             >
               Rating
             </label>
-            <div className='relative'></div>
+            <div className='relative'>
+             <Rating
+                  style={{ maxWidth: 150 }}
+                  value={rating}
+                  onChange={setRating}
+                  isRequired
+                />
+            </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.rating &&
                 state.errors.rating.map((error: string) => (
