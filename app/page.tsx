@@ -4,20 +4,18 @@ import { Button } from '@/app/ui/button';
 
 export default function Page() {
   return (
-    <main className='flex mx-auto my-0 p-6'>
+    <main className='mx-auto my-0 flex p-6'>
       <div className='mt-4 flex grow flex-col gap-4 md:flex-row'>
         <div className='flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-3/5'>
-          <p className='text-xl text-gray-300 md:text-3xl md:leading-normal text-right'>
-            <strong>Welcome to BookBase.</strong>
+          <p className='text-right text-xl text-gray-300 md:text-3xl md:leading-normal'>
+            <strong className="title">Welcome to BookBase.</strong>
             <span className='block'>Store your favourite books today. </span>
           </p>
-          <div className='flex gap-4 justify-end'>
-            <Button
-            >
+          <div className='flex justify-end gap-4'>
+            <Button>
               <Link href='/login'>Log in</Link>
             </Button>
-            <Button
-            >
+            <Button>
               <Link href='/signup'>Sign up</Link>
             </Button>
           </div>

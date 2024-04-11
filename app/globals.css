@@ -68,7 +68,22 @@ body::after {
   display: none;
 }
 
-.tag-checkbox input[type="checkbox"]:checked + label {
-  background-color: #9CA3AFFF;
-  color: #091231FF;
+.tag-checkbox input[type='checkbox']:checked + label {
+  background-color: #9ca3afff;
+  color: #091231ff;
+}
+
+.title {
+  color: transparent;
+  background-image: linear-gradient(#FFFFFF, #FFFFFF);
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-position: -160px 0;
+  animation: backcolor 3s linear infinite alternate;
+}
+
+@keyframes backcolor {
+  100% {
+    background-position: 0 0;
+  }
 }
