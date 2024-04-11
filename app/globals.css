@@ -75,7 +75,7 @@ body::after {
 
 .title {
   color: transparent;
-  background-image: linear-gradient(#FFFFFF, #FFFFFF);
+  background-image: linear-gradient(#ffffff, #ffffff);
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-position: -160px 0;

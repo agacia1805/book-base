@@ -8,7 +8,7 @@ export default function Page() {
       <div className='mt-4 flex grow flex-col gap-4 md:flex-row'>
         <div className='flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-3/5'>
           <p className='text-right text-xl text-gray-300 md:text-3xl md:leading-normal'>
-            <strong className="title">Welcome to BookBase.</strong>
+            <strong className='title'>Welcome to BookBase.</strong>
             <span className='block'>Store your favourite books today. </span>
           </p>
           <div className='flex justify-end gap-4'>
