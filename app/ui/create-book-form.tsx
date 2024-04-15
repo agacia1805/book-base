@@ -11,11 +11,11 @@ export default function CreateBookForm() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createBook, initialState);
 
-  const [rating, setRating] = useState<number>(0);
+    const [rating, setRating] = useState(0);
 
-  function onChange(newValue: number) {
-    setRating(newValue);
-  }
+    function onChange(newValue: number) {
+      setRating(newValue);
+    }
 
   const genres = [
     'memoir/autobiography',
@@ -67,6 +67,7 @@ export default function CreateBookForm() {
                 name='title'
                 placeholder='Title'
                 required
+                aria-describedby='customer-error'
               />
             </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
@@ -112,7 +113,7 @@ export default function CreateBookForm() {
             </label>
             <div className='relative'>
               <textarea
-                className='peer block h-[120px] w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500 focus-visible:outline-gray-300'
+                className='peer h-[120px] block w-full rounded-md border border-gray-200 py-[9px] pl-2 text-sm text-gray-700 outline-2 placeholder:text-gray-500 focus-visible:outline-gray-300'
                 id='description'
                 name='description'
                 placeholder='Description'
@@ -136,12 +137,12 @@ export default function CreateBookForm() {
               Rating
             </label>
             <div className='relative'>
-              <Rating
-                style={{ maxWidth: 150 }}
-                value={rating}
-                onChange={setRating}
-                isRequired
-              />
+             <Rating
+                  style={{ maxWidth: 150 }}
+                  value={rating}
+                  onChange={setRating}
+                  isRequired
+                />
             </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.rating &&
@@ -156,21 +157,21 @@ export default function CreateBookForm() {
             <legend className='mb-2 block text-xs font-medium'>Genre(s)</legend>
             <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2'>
               {genres.map((genre) => (
-                <div key={genre} className='tag-checkbox'>
-                  <input
-                    id={genre}
-                    name='genre'
-                    type='checkbox'
-                    value={genre}
-                    aria-describedby='status-error'
-                  />
-                  <label
-                    htmlFor={genre}
-                    className='m-1 flex cursor-pointer cursor-pointer select-none items-center rounded-full bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-300'
-                  >
-                    {genre}
-                  </label>
-                </div>
+                <div key={genre} className="tag-checkbox">
+                      <input
+                        id={genre}
+                        name='genre'
+                        type='checkbox'
+                        value={genre}
+                        aria-describedby='status-error'
+                      />
+                      <label
+                        htmlFor={genre}
+                        className='flex select-none cursor-pointer items-center rounded-full bg-gray-200 hover:bg-gray-300 px-2 py-1 m-1 text-xs font-medium text-gray-600 cursor-pointer'
+                      >
+                        {genre}
+                      </label>
+                    </div>
               ))}
             </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
