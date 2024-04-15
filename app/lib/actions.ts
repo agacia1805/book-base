@@ -58,6 +58,8 @@ export async function createBook(prevState: State, formData: FormData) {
         `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
+    console.error('Database Error:', error);
+
     return {
       message: 'Database Error: Failed to create book.',
     };
