@@ -66,11 +66,10 @@ export default function CreateBookForm() {
                 id='title'
                 name='title'
                 placeholder='Title'
-                required
-                aria-describedby='customer-error'
+                aria-describedby='title-error'
               />
             </div>
-            <div id='customer-error' aria-live='polite' aria-atomic='true'>
+            <div id='title-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.title &&
                 state.errors.title.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
@@ -93,9 +92,10 @@ export default function CreateBookForm() {
                 name='author'
                 placeholder='Author'
                 required
+                aria-describedby='author-error'
               />
             </div>
-            <div id='customer-error' aria-live='polite' aria-atomic='true'>
+            <div id='author-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.author &&
                 state.errors.author.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
@@ -118,9 +118,10 @@ export default function CreateBookForm() {
                 name='description'
                 placeholder='Description'
                 required
+                aria-describedby='description-error'
               />
             </div>
-            <div id='customer-error' aria-live='polite' aria-atomic='true'>
+            <div id='description-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.description &&
                 state.errors.description.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
@@ -142,9 +143,10 @@ export default function CreateBookForm() {
                   value={rating}
                   onChange={setRating}
                   isRequired
+                  aria-describedby='rating-error'
                 />
             </div>
-            <div id='customer-error' aria-live='polite' aria-atomic='true'>
+            <div id='rating-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.rating &&
                 state.errors.rating.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
@@ -163,7 +165,7 @@ export default function CreateBookForm() {
                         name='genre'
                         type='checkbox'
                         value={genre}
-                        aria-describedby='status-error'
+                        aria-describedby='genre-error'
                       />
                       <label
                         htmlFor={genre}
@@ -174,7 +176,7 @@ export default function CreateBookForm() {
                     </div>
               ))}
             </div>
-            <div id='customer-error' aria-live='polite' aria-atomic='true'>
+            <div id='genre-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.genre &&
                 state.errors.genre.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
