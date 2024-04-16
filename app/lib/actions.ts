@@ -38,7 +38,7 @@ export type State = {
   message?: string | null;
 };
 
-export async function createBook(prevState: State, formData: FormData) {
+export async function createBook(prevState: State, formData: FormData):  Promise<State> {
   // Validate form using Zod
   const validatedFields = CreateBook.safeParse({
     title: formData.get('title'),
@@ -48,7 +48,6 @@ export async function createBook(prevState: State, formData: FormData) {
     genre: formData.get('genre'),
   });
 
-  console.log(formData);
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
