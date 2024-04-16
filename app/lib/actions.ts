@@ -16,6 +16,12 @@ const FormSchema = z.object({
   description: z.string({
     invalid_type_error: 'Please provide a description',
   }),
+  rating: z.number({
+    invalid_type_error: 'Please provide a rating',
+  }),
+  genre: z.string({
+    invalid_type_error: 'Please provide genre(s)',
+  }),
   date: z.string(),
 });
 
@@ -26,6 +32,8 @@ export type State = {
     title?: string[];
     author?: string[];
     description?: string[];
+    rating?: string[];
+    genre?: string[];
   };
   message?: string | null;
 };
@@ -36,8 +44,11 @@ export async function createBook(prevState: State, formData: FormData) {
     title: formData.get('title'),
     author: formData.get('author'),
     description: formData.get('description'),
+    rating: formData.get('rating'),
+    genre: formData.get('genre'),
   });
 
+  console.log(formData);
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -47,14 +58,15 @@ export async function createBook(prevState: State, formData: FormData) {
   }
 
   // Prepare data for insertion into the database
-  const { title, author, description } = validatedFields.data;
+  const { title, author, description, rating, genre } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
+  const genreString = [genre].join(',');
 
   // Insert data into the database
   try {
     await sql`
-            INSERT INTO books (title, author, description, date)
-            VALUES (${title}, ${author}, ${description}, ${date})
+            INSERT INTO books (title, author, description, rating, genre, date)
+            VALUES (${title}, ${author}, ${description}, ${rating}, ${genreString}, ${date})
         `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -66,55 +78,5 @@ export async function createBook(prevState: State, formData: FormData) {
   }
   // Revalidate the cache for the dashboard page and redirect the user.
   revalidatePath('/dashboard');
-  // redirect('/dashboard');
-}
-
-const UpdateBook = FormSchema.omit({ id: true, date: true });
-
-export async function updateBook(
-  id: string,
-  prevState: State,
-  formData: FormData
-) {
-  const validatedFields = UpdateBook.safeParse({
-    title: formData.get('title'),
-    author: formData.get('author'),
-    description: formData.get('description'),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to update book.',
-    };
-  }
-
-  const { title, author, description } = validatedFields.data;
-
-  try {
-    await sql`
-            UPDATE books
-            SET title = ${title},
-                author      = ${author},
-                description      = ${description}
-            WHERE id = ${id}
-        `;
-  } catch (error) {
-    return { message: 'Database Error: Failed to update book.' };
-  }
-
-  revalidatePath('/dashboard');
   redirect('/dashboard');
-}
-
-export async function deleteBook(id: string) {
-  try {
-    await sql`DELETE
-                  FROM books
-                  WHERE id = ${id}`;
-    revalidatePath('/dashboard');
-    return { message: 'Deleted book.' };
-  } catch (error) {
-    return { message: 'Database Error: Failed to delete book.' };
-  }
 }
