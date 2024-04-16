@@ -1,4 +1,4 @@
-import CreateBookForm from '@/app/ui/create-book-form';
+import Form from '@/app/ui/create-form';
 import { Button } from '@/app/ui/button';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -36,7 +36,7 @@ export default function Page() {
         >
           <XMarkIcon className='h-8 w-8 text-[#091231FF]' />
         </button>
-        <CreateBookForm />
+        <Form/>
       </div>
     </main>
   );
