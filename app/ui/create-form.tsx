@@ -4,18 +4,10 @@ import { useState } from 'react';
 import { Button } from './button';
 import { createBook } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
-import { Rating } from '@smastrom/react-rating';
-import '@smastrom/react-rating/style.css';
 
 export default function Form() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createBook, initialState);
-
-  const [rating, setRating] = useState(0);
-
-  function onChange(newValue: number) {
-    setRating(newValue);
-  }
 
   const genres = [
     'memoir/autobiography',
@@ -122,31 +114,6 @@ export default function Form() {
             <div id='description-error' aria-live='polite' aria-atomic='true'>
               {state.errors?.description &&
                 state.errors.description.map((error: string) => (
-                  <p className='mt-2 text-sm text-red-500' key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
-          </div>
-          <div className='mt-4'>
-            <label
-              className='mb-2 mt-5 block text-xs font-medium'
-              htmlFor='rating'
-            >
-              Rating
-            </label>
-            <div className='relative'>
-              <Rating
-                style={{ maxWidth: 150 }}
-                value={rating}
-                onChange={setRating}
-                isRequired
-                aria-describedby='rating-error'
-              />
-            </div>
-            <div id='rating-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.rating &&
-                state.errors.rating.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
                   </p>
