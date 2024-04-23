@@ -36,7 +36,7 @@ export default function Page() {
         >
           <XMarkIcon className='h-8 w-8 text-[#091231FF]' />
         </button>
-        <Form/>
+        <Form />
       </div>
     </main>
   );
