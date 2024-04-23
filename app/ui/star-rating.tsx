@@ -13,7 +13,12 @@ interface IStarProps {
   readOnly?: boolean;
 }
 
-function RatingStar({ index, rating, onClick, readOnly }: IStarProps): ReactElement {
+function RatingStar({
+  index,
+  rating,
+  onClick,
+  readOnly,
+}: IStarProps): ReactElement {
   const handleStarClick = () => {
     if (!readOnly && onClick) {
       onClick(index + 1);
@@ -27,7 +32,14 @@ function RatingStar({ index, rating, onClick, readOnly }: IStarProps): ReactElem
     starIcon = <FullStar className='h-6 w-6 text-yellow-300' />;
   }
 
-  return <span onClick={handleStarClick} className={`${!readOnly && 'cursor-pointer'}`}>{starIcon}</span>;
+  return (
+    <span
+      onClick={handleStarClick}
+      className={`${!readOnly && 'cursor-pointer'}`}
+    >
+      {starIcon}
+    </span>
+  );
 }
 
 interface IStarRatingProps {
@@ -58,7 +70,7 @@ export function StarRating({
           readOnly={readOnly}
         />
       ))}
-        <input type="hidden" name="rating" value={rating} />
+      <input type='hidden' name='rating' value={rating} />
     </div>
   );
 }
