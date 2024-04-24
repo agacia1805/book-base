@@ -37,7 +37,7 @@ export default async function Page() {
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
            {books.map((book) => {
                 return (
-                <BookCard id={book.id} title={book.title} author={book.author} description={book.description} rating={book.rating} genre={book.genre}/>
+                <BookCard key={book.id} id={book.id} title={book.title} author={book.author} description={book.description} rating={book.rating} genre={book.genre}/>
                 )
            })}
           </div>
