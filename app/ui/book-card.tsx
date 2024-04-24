@@ -3,7 +3,7 @@ interface BookCardProps {
   title: string;
   author: string;
   description: string;
-  rating: string;
+  rating: number;
   genre: string;
 }
 
