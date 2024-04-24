@@ -1,5 +1,6 @@
 import Form from '@/app/ui/create-form';
 import { Button } from '@/app/ui/button';
+import { BookCard } from '@/app/ui/book-card';
 import { PlusIcon, XMarkIcon, BookOpenIcon } from '@heroicons/react/24/outline';
 import { fetchBooks } from '@/app/lib/data';
 
@@ -34,7 +35,11 @@ export default async function Page() {
             Add a book
           </Button>
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            second element
+           {books.map((book) => {
+                return (
+                <BookCard id={book.id} title={book.title} author={book.author} description={book.description} rating={book.rating} genre={book.genre}/>
+                )
+           })}
           </div>
         </div>
       ) : (
