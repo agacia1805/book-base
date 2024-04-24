@@ -1,6 +1,7 @@
 import Form from '@/app/ui/create-form';
 import { Button } from '@/app/ui/button';
-import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, XMarkIcon, BookOpenIcon } from '@heroicons/react/24/outline';
+import { fetchBooks } from '@/app/lib/data';
 
 declare module 'react' {
   interface HTMLAttributes<T> {
@@ -15,15 +16,39 @@ declare module 'react' {
   }
 }
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: 'Dashboard page to store your books',
+};
+
+export default async function Page() {
+  const books = await fetchBooks();
+
   return (
     <main className='flex w-full p-6'>
-      <Button
-        popovertarget='create-book-popover'
-        className='ml-auto text-lg font-semibold'
-      >
-        Add a book
-      </Button>
+      {books ? (
+        <div className='w-full'>
+          <Button
+            popovertarget='create-book-popover'
+            className='ml-auto text-lg font-semibold'
+          >
+            Add a book
+          </Button>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+            second element
+          </div>
+        </div>
+      ) : (
+        <div className='flex w-full flex-col items-center justify-center gap-6 text-white'>
+          <BookOpenIcon className='h-12 w-12' />
+          <p className='text-xl'>You have no books saved</p>
+          <Button
+            popovertarget='create-book-popover'
+            className='text-lg font-semibold'
+          >
+            Add a book
+          </Button>
+        </div>
+      )}
       <div
         id='create-book-popover'
         popover='manual'
