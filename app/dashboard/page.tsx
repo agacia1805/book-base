@@ -3,6 +3,7 @@ import { Button } from '@/app/ui/button';
 import { BookCard } from '@/app/ui/book-card';
 import { PlusIcon, XMarkIcon, BookOpenIcon } from '@heroicons/react/24/outline';
 import { fetchBooks } from '@/app/lib/data';
+import { Metadata } from 'next';
 
 declare module 'react' {
   interface HTMLAttributes<T> {
