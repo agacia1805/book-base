@@ -27,8 +27,8 @@ export default async function Page() {
 
   return (
     <main className='flex w-full p-6'>
-      {books ? (
-        <div className='w-full'>
+      {books?.length ? (
+        <div className='flex w-full flex-col gap-6'>
           <Button
             popovertarget='create-book-popover'
             className='ml-auto text-lg font-semibold'
@@ -36,11 +36,19 @@ export default async function Page() {
             Add a book
           </Button>
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-           {books.map((book) => {
-                return (
-                <BookCard key={book.id} id={book.id} title={book.title} author={book.author} description={book.description} rating={book.rating} genre={book.genre}/>
-                )
-           })}
+            {books.map((book) => {
+              return (
+                <BookCard
+                  key={book.id}
+                  id={book.id}
+                  title={book.title}
+                  author={book.author}
+                  description={book.description}
+                  rating={book.rating}
+                  genre={book.genre}
+                />
+              );
+            })}
           </div>
         </div>
       ) : (
