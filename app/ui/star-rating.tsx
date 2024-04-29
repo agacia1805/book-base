@@ -29,7 +29,7 @@ function RatingStar({
   if (rating > index + MAX_VALUE) {
     starIcon = <FullStar className='h-6 w-6 text-yellow-500' />;
   } else if (rating >= index + MIN_VALUE) {
-    starIcon = <FullStar className='h-6 w-6 text-yellow-300' />;
+    starIcon = <FullStar className='h-6 w-6 text-yellow-500' />;
   }
 
   return (

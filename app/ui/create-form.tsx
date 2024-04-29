@@ -9,13 +9,18 @@ import { useFormState } from 'react-dom';
 export default function Form() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createBook, initialState);
-  console.log(state);
 
   const [rating, setRating] = useState<number>(0);
+  const [image, setImage] = useState<File | null>(null);
 
-  function onChange(newValue: number) {
+  const onChangeRating = (newValue: number) => {
     setRating(newValue);
-  }
+  };
+
+  const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    setImage(file);
+  };
 
   const genres = [
     'memoir/autobiography',
@@ -70,7 +75,7 @@ export default function Form() {
               />
             </div>
             <div id='title-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.title &&
+              {state?.errors?.title &&
                 state.errors.title.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
@@ -95,7 +100,7 @@ export default function Form() {
               />
             </div>
             <div id='author-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.author &&
+              {state?.errors?.author &&
                 state.errors.author.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
@@ -120,13 +125,31 @@ export default function Form() {
               />
             </div>
             <div id='description-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.description &&
+              {state?.errors?.description &&
                 state.errors.description.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
                   </p>
                 ))}
             </div>
+          </div>
+          <div className='mt-4'>
+            <label
+              className='mb-2 mt-5 block text-xs font-medium'
+              htmlFor='image'
+            >
+              Book Cover
+            </label>
+            <input
+              type='file'
+              id='image'
+              name='image'
+              accept='image/*'
+              onChange={onChangeImage}
+              className='block w-full text-sm text-gray-900 file:mr-4 file:rounded-full file:border-0
+                               file:bg-violet-50 file:px-4 file:py-2 file:cursor-pointer
+                               file:font-semibold file:text-violet-700 file:bg-violet-100'
+            />
           </div>
           <div className='mt-4'>
             <label
@@ -139,7 +162,7 @@ export default function Form() {
               <StarRating score={0} readOnly={false} />
             </div>
             <div id='customer-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.rating &&
+              {state?.errors?.rating &&
                 state.errors.rating.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
@@ -149,7 +172,7 @@ export default function Form() {
           </div>
           <fieldset className='mt-5'>
             <legend className='mb-2 block text-xs font-medium'>Genre(s)</legend>
-            <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2'>
+            <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2 md:h-full'>
               {genres.map((genre) => (
                 <div key={genre} className='tag-checkbox'>
                   <input
@@ -169,7 +192,7 @@ export default function Form() {
               ))}
             </div>
             <div id='genre-error' aria-live='polite' aria-atomic='true'>
-              {state.errors?.genre &&
+              {state?.errors?.genre &&
                 state.errors.genre.map((error: string) => (
                   <p className='mt-2 text-sm text-red-500' key={error}>
                     {error}
