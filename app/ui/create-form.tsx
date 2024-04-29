@@ -146,9 +146,9 @@ export default function Form() {
               name='image'
               accept='image/*'
               onChange={onChangeImage}
-              className='block w-full text-sm text-gray-900 file:mr-4 file:rounded-full file:border-0
-                               file:bg-violet-50 file:px-4 file:py-2 file:cursor-pointer
-                               file:font-semibold file:text-violet-700 file:bg-violet-100'
+              className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
+                               file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
+                               file:py-2 file:font-semibold file:text-violet-700'
             />
           </div>
           <div className='mt-4'>
