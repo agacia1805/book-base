@@ -25,10 +25,12 @@ export function BookCard({
   return (
     <div className='overflow-hidden rounded-lg bg-[#1d2231] shadow-md'>
       <div className='relative h-64'>
-        <img
-          alt='Book Cover'
-          className='h-full w-full '
+        <Image
           src='/book-placeholder.png'
+          alt={`Book Cover: ${title}`}
+          className='h-full w-full'
+          width={256}
+          height={334}
           style={{
             aspectRatio: '256/334',
             objectFit: 'cover',
@@ -48,7 +50,7 @@ export function BookCard({
             <StarRating score={rating} readOnly={true} />
           </span>
         </div>
-        <div className='flex items-center space-x-2'>
+        <div className='flex flex-wrap items-center gap-2'>
           {genresArray.map((genre) => {
             return (
               <div
