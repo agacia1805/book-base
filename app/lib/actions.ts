@@ -10,6 +10,9 @@ const FormSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a title' }),
   author: z.string().min(1, { message: 'Please provide an author' }),
   description: z.string().min(1, { message: 'Please provide a description' }),
+  status: z.enum(['finished', 'to read'], {
+    invalid_type_error: 'Please select a status.',
+  }),
   rating: z.string().min(1, { message: 'Please provide a rating' }),
   genre: z.array(z.string()).min(1, { message: 'Please provide genre(s)' }),
   date: z.string(),
@@ -22,6 +25,7 @@ export type State = {
     title?: string[];
     author?: string[];
     description?: string[];
+    status?: string[];
     rating?: string[];
     genre?: string[];
   };
@@ -36,6 +40,7 @@ export async function createBook(
     title: formData.get('title'),
     author: formData.get('author'),
     description: formData.get('description'),
+    status: formData.get('status'),
     rating: formData.get('rating'),
     genre: formData.getAll('genre'),
   });
@@ -47,15 +52,16 @@ export async function createBook(
     };
   }
 
-  const { title, author, description, rating, genre } = validatedFields.data;
+  const { title, author, description, status, rating, genre } =
+    validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
   const genreString = [genre].join(',');
   const ratingNumber = Number(rating);
 
   try {
     await sql`
-            INSERT INTO books (title, author, description, rating, genre, date)
-            VALUES (${title}, ${author}, ${description}, ${rating}, ${genreString}, ${date})
+            INSERT INTO books (title, author, description, status, rating, genre, date)
+            VALUES (${title}, ${author}, ${description}, ${status}, ${rating}, ${genreString}, ${date})
         `;
   } catch (error) {
     console.error('Database Error:', error);
@@ -64,6 +70,7 @@ export async function createBook(
       message: 'Database Error: Failed to create book.',
     };
   }
+
   revalidatePath('/dashboard');
   redirect('/dashboard');
 }

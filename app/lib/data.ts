@@ -9,6 +9,7 @@ export async function fetchBooks() {
         title, 
         author,
         description,
+        status,
         rating, 
         genre
       FROM books
