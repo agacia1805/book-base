@@ -44,6 +44,7 @@ export default async function Page() {
                   title={book.title}
                   author={book.author}
                   description={book.description}
+                  status={book.status}
                   rating={book.rating}
                   genre={book.genre}
                 />
@@ -66,7 +67,7 @@ export default async function Page() {
       <div
         id='create-book-popover'
         popover='manual'
-        className='create-book-popover w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
+        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
       >
         <button
           popovertarget='create-book-popover'
