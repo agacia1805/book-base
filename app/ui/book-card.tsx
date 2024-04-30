@@ -8,6 +8,7 @@ interface BookCardProps {
   title: string;
   author: string;
   description: string;
+  status: string;
   rating: number;
   genre: string;
 }
@@ -17,6 +18,7 @@ export function BookCard({
   title,
   author,
   description,
+  status,
   rating,
   genre,
 }: BookCardProps) {
@@ -36,6 +38,11 @@ export function BookCard({
             objectFit: 'cover',
           }}
         />
+        <span
+          className={`flex cursor-pointer items-center gap-1.5 rounded-full ${status === 'to read' ? 'bg-pink-300' : 'bg-blue-300'} absolute right-2 top-2 px-3 py-1.5 text-xs font-medium uppercase`}
+        >
+          {status}
+        </span>
       </div>
       <div className='space-y-2 p-4'>
         <div>
