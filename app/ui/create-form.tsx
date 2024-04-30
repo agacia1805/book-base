@@ -4,7 +4,27 @@ import { useState } from 'react';
 import { Button } from './button';
 import { StarRating } from './star-rating';
 import { createBook } from '@/app/lib/actions';
-import { useFormState } from 'react-dom';
+import {
+  CheckBadgeIcon,
+  BookmarkSquareIcon,
+} from '@heroicons/react/24/outline';
+import { useFormState, useFormStatus } from 'react-dom';
+
+function SubmitButton() {
+  const { pending, data, method, action } = useFormStatus();
+
+  return (
+    <div className='flex justify-center gap-4'>
+      <Button
+        className='mt-6 flex w-36 justify-center text-lg font-semibold disabled:cursor-not-allowed disabled:opacity-60'
+        type='submit'
+        disabled={pending}
+      >
+        Save
+      </Button>
+    </div>
+  );
+}
 
 export default function Form() {
   const initialState = { message: null, errors: {} };
@@ -60,7 +80,7 @@ export default function Form() {
         <div className='w-full'>
           <div>
             <label
-              className='mb-2 mt-5 block text-xs font-medium'
+              className='mb-2 mt-3 block text-xs font-medium'
               htmlFor='title'
             >
               Title
@@ -85,7 +105,7 @@ export default function Form() {
           </div>
           <div className='mt-4'>
             <label
-              className='mb-2 mt-5 block text-xs font-medium'
+              className='mb-2 mt-3 block text-xs font-medium'
               htmlFor='author'
             >
               Author
@@ -110,7 +130,7 @@ export default function Form() {
           </div>
           <div className='mt-4'>
             <label
-              className='mb-2 mt-5 block text-xs font-medium'
+              className='mb-2 mt-3 block text-xs font-medium'
               htmlFor='description'
             >
               Description
@@ -135,7 +155,7 @@ export default function Form() {
           </div>
           <div className='mt-4'>
             <label
-              className='mb-2 mt-5 block text-xs font-medium'
+              className='mb-2 mt-3 block text-xs font-medium'
               htmlFor='image'
             >
               Book Cover
@@ -153,7 +173,59 @@ export default function Form() {
           </div>
           <div className='mt-4'>
             <label
-              className='mb-2 mt-5 block text-xs font-medium'
+              className='mb-2 mt-3 block text-xs font-medium'
+              htmlFor='description'
+            >
+              Book status
+            </label>
+            <div className='rounded-md border border-gray-200 bg-white px-[14px] py-3'>
+              <div className='flex gap-4'>
+                <div className='flex items-center'>
+                  <input
+                    id='finished'
+                    name='status'
+                    type='radio'
+                    value='finished'
+                    className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600'
+                    aria-describedby='status-error'
+                  />
+                  <label
+                    htmlFor='finished'
+                    className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-blue-300 px-3 py-1.5 text-xs font-medium'
+                  >
+                    Finished <CheckBadgeIcon className='h-4 w-4' />
+                  </label>
+                </div>
+                <div className='flex items-center'>
+                  <input
+                    id='to read'
+                    name='status'
+                    type='radio'
+                    value='to read'
+                    className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100'
+                    aria-describedby='status-error'
+                  />
+                  <label
+                    htmlFor='to read'
+                    className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-pink-300 px-3 py-1.5 text-xs font-medium'
+                  >
+                    To read <BookmarkSquareIcon className='h-4 w-4' />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div id='description-error' aria-live='polite' aria-atomic='true'>
+              {state?.errors?.status &&
+                state.errors.status.map((error: string) => (
+                  <p className='mt-2 text-sm text-red-500' key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
+          </div>
+          <div className='mt-4'>
+            <label
+              className='mb-2 mt-3 block text-xs font-medium'
               htmlFor='rating'
             >
               Rating
@@ -170,9 +242,9 @@ export default function Form() {
                 ))}
             </div>
           </div>
-          <fieldset className='mt-5'>
+          <fieldset className='mt-3'>
             <legend className='mb-2 block text-xs font-medium'>Genre(s)</legend>
-            <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2 md:h-full'>
+            <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2'>
               {genres.map((genre) => (
                 <div key={genre} className='tag-checkbox'>
                   <input
@@ -201,14 +273,7 @@ export default function Form() {
             </div>
           </fieldset>
         </div>
-        <div className='flex justify-center gap-4'>
-          <Button
-            className='mt-6 flex w-36 justify-center text-lg font-semibold'
-            type='submit'
-          >
-            Save
-          </Button>
-        </div>
+        <SubmitButton />
       </div>
     </form>
   );

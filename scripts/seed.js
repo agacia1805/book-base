@@ -10,6 +10,7 @@ async function seedBooks(client) {
             author VARCHAR(255) NOT NULL,
             description TEXT NOT NULL,
             image_url TEXT,
+            status VARCHAR(255) NOT NULL,
             rating INTEGER NOT NULL,
             genre TEXT NOT NULL,
             date DATE NOT NULL
