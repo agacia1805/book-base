@@ -30,6 +30,7 @@ export type State = {
     genre?: string[];
   };
   message?: string | null;
+  resetKey?: string | null;
 };
 
 export async function createBook(
@@ -49,6 +50,7 @@ export async function createBook(
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to create book.',
+      resetKey: prevState.resetKey,
     };
   }
 
@@ -63,6 +65,12 @@ export async function createBook(
             INSERT INTO books (title, author, description, status, rating, genre, date)
             VALUES (${title}, ${author}, ${description}, ${status}, ${rating}, ${genreString}, ${date})
         `;
+
+    revalidatePath('/dashboard');
+
+    return {
+      resetKey: Date.now().toString(),
+    };
   } catch (error) {
     console.error('Database Error:', error);
 
@@ -70,9 +78,6 @@ export async function createBook(
       message: 'Database Error: Failed to create book.',
     };
   }
-
-  revalidatePath('/dashboard');
-  redirect('/dashboard');
 }
 
 export async function deleteInvoice(id: string) {
