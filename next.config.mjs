@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'book-base.public.blob.vercel-storage.com',
+        port: '',
+      },
+    ],
+  },
+};
 export default nextConfig;
