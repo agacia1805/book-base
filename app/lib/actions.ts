@@ -3,6 +3,8 @@
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
+import { put } from '@vercel/blob';
+
 import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
@@ -10,6 +12,7 @@ const FormSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a title' }),
   author: z.string().min(1, { message: 'Please provide an author' }),
   description: z.string().min(1, { message: 'Please provide a description' }),
+  image: z.any(),
   status: z.enum(['finished', 'to read'], {
     invalid_type_error: 'Please select a status.',
   }),
@@ -25,6 +28,7 @@ export type State = {
     title?: string[];
     author?: string[];
     description?: string[];
+    image?: string[];
     status?: string[];
     rating?: string[];
     genre?: string[];
@@ -41,6 +45,7 @@ export async function createBook(
     title: formData.get('title'),
     author: formData.get('author'),
     description: formData.get('description'),
+    image: formData.get('image'),
     status: formData.get('status'),
     rating: formData.get('rating'),
     genre: formData.getAll('genre'),
@@ -54,7 +59,7 @@ export async function createBook(
     };
   }
 
-  const { title, author, description, status, rating, genre } =
+  const { title, author, description, image, status, rating, genre } =
     validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
   const genreString = [genre].join(',');
@@ -65,6 +70,10 @@ export async function createBook(
             INSERT INTO books (title, author, description, status, rating, genre, date)
             VALUES (${title}, ${author}, ${description}, ${status}, ${rating}, ${genreString}, ${date})
         `;
+
+    await put(title, image, {
+      access: 'public',
+    });
 
     revalidatePath('/dashboard');
 
