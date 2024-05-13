@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Button } from './button';
 import { StarRating } from './star-rating';
 import { createBook } from '@/app/lib/actions';
@@ -10,8 +10,23 @@ import {
 } from '@heroicons/react/24/outline';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton() {
-  const { pending, data, method, action } = useFormStatus();
+type Errors = {
+  title?: string[];
+  author?: string[];
+  description?: string[];
+  status?: string[];
+  rating?: string[];
+  genre?: string[];
+};
+
+function SubmitButton({ errors }: Errors) {
+  const { pending } = useFormStatus();
+  const handleOnClick = useCallback(() => {
+    if (JSON.stringify(errors) === '{}' && !pending) {
+      document.getElementById('create-book-popover').hidePopover();
+    }
+  }, [pending, errors]);
+
 
   return (
     <div className='flex justify-center gap-4'>
@@ -19,6 +34,7 @@ function SubmitButton() {
         className='mt-6 flex w-36 justify-center text-lg font-semibold disabled:cursor-not-allowed disabled:opacity-60'
         type='submit'
         disabled={pending}
+        onClick={handleOnClick}
       >
         Save
       </Button>
@@ -72,7 +88,7 @@ export default function Form() {
   ];
 
   return (
-    <form className='p-1 md:p-6' action={dispatch}>
+    <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>
       <div className='flex-1 rounded-lg'>
         <h1 className='mb-2 text-center text-2xl font-semibold text-[#091231FF]'>
           Create a new book
@@ -273,7 +289,7 @@ export default function Form() {
             </div>
           </fieldset>
         </div>
-        <SubmitButton />
+        <SubmitButton errors={state?.errors} />
       </div>
     </form>
   );
