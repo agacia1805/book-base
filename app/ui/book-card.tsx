@@ -8,6 +8,7 @@ interface BookCardProps {
   title: string;
   author: string;
   description: string;
+  image: string;
   status: string;
   rating: number;
   genre: string;
@@ -18,17 +19,19 @@ export function BookCard({
   title,
   author,
   description,
+  image,
   status,
   rating,
   genre,
 }: BookCardProps) {
   const genresArray = genre.split(',');
+  const imageSrc = image || `/book-placeholder.png`;
 
   return (
     <div className='overflow-hidden rounded-lg bg-[#1d2231] shadow-md'>
       <div className='relative h-64'>
         <Image
-          src='/book-placeholder.png'
+          src={imageSrc}
           alt={`Book Cover: ${title}`}
           className='h-full w-full'
           width={256}

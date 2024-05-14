@@ -47,6 +47,7 @@ export default async function Page() {
                   status={book.status}
                   rating={book.rating}
                   genre={book.genre}
+                  image={book.image_url}
                 />
               );
             })}
