@@ -64,16 +64,23 @@ export async function createBook(
   const date = new Date().toISOString().split('T')[0];
   const genreString = [genre].join(',');
   const ratingNumber = Number(rating);
+  let imageUrl;
+
+  if (image) {
+    try {
+      const uploadResult = await put(title, image, { access: 'public' });
+      imageUrl = uploadResult.url;
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+    }
+    imageUrl = null;
+  }
 
   try {
     await sql`
-            INSERT INTO books (title, author, description, status, rating, genre, date)
-            VALUES (${title}, ${author}, ${description}, ${status}, ${rating}, ${genreString}, ${date})
+            INSERT INTO books (title, author, description, image_url, status, rating, genre, date)
+            VALUES (${title}, ${author}, ${description}, ${imageUrl}, ${status}, ${rating}, ${genreString}, ${date})
         `;
-
-    await put(title, image, {
-      access: 'public',
-    });
 
     revalidatePath('/dashboard');
 
@@ -86,17 +93,5 @@ export async function createBook(
     return {
       message: 'Database Error: Failed to create book.',
     };
-  }
-}
-
-export async function deleteInvoice(id: string) {
-  try {
-    await sql`DELETE
-                  FROM books
-                  WHERE id = ${id}`;
-    revalidatePath('/dashboard');
-    return { message: 'Deleted book.' };
-  } catch (error) {
-    return { message: 'Database Error: Failed to delete book.' };
   }
 }
