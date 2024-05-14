@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Button } from './button';
 import { StarRating } from './star-rating';
 import { createBook } from '@/app/lib/actions';
@@ -10,23 +10,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { useFormState, useFormStatus } from 'react-dom';
 
-type Errors = {
-  title?: string[];
-  author?: string[];
-  description?: string[];
-  status?: string[];
-  rating?: string[];
-  genre?: string[];
-};
-
-function SubmitButton({ errors }: Errors) {
+function SubmitButton() {
   const { pending } = useFormStatus();
-  const handleOnClick = useCallback(() => {
-    if (JSON.stringify(errors) === '{}' && !pending) {
-      document.getElementById('create-book-popover').hidePopover();
-    }
-  }, [pending, errors]);
-
 
   return (
     <div className='flex justify-center gap-4'>
@@ -34,7 +19,6 @@ function SubmitButton({ errors }: Errors) {
         className='mt-6 flex w-36 justify-center text-lg font-semibold disabled:cursor-not-allowed disabled:opacity-60'
         type='submit'
         disabled={pending}
-        onClick={handleOnClick}
       >
         Save
       </Button>
@@ -289,7 +273,7 @@ export default function Form() {
             </div>
           </fieldset>
         </div>
-        <SubmitButton errors={state?.errors} />
+        <SubmitButton />
       </div>
     </form>
   );
