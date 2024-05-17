@@ -73,6 +73,7 @@ export async function createBook(
     } catch (error) {
       console.error('Failed to upload image:', error);
     }
+  } else {
     imageUrl = null;
   }
 
