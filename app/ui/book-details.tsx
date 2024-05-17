@@ -19,23 +19,18 @@ export function BookDetails({
 
   return (
     <div>
-      <div className='relative h-64'>
+      <div className='h-72'>
         <Image
           src={imageSrc}
           alt={`Book Cover: ${title}`}
           className='h-full w-full'
           width={256}
-          height={334}
+          height={256}
           style={{
-            aspectRatio: '256/334',
+            aspectRatio: '1/1',
             objectFit: 'cover',
           }}
         />
-        <span
-          className={`flex cursor-pointer items-center gap-1.5 rounded-full ${status === 'to read' ? 'bg-pink-300' : 'bg-blue-300'} absolute right-2 top-2 px-3 py-1.5 text-xs font-medium uppercase`}
-        >
-          {status}
-        </span>
       </div>
       <div className='space-y-4 p-4 text-[#091231FF]'>
         <div>

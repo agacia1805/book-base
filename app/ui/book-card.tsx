@@ -22,7 +22,7 @@ export function BookCard({
   return (
     <>
       <button
-        className='overflow-hidden rounded-lg bg-[#1d2231] text-left shadow-md hover:ring-1 hover:ring-gray-400 hover:ring-opacity-60 hover:transition'
+        className='overflow-hidden rounded-lg bg-[#1d2231] text-left shadow-md'
         popovertarget='book-details-popover'
       >
         <div className='relative h-64'>
@@ -31,9 +31,9 @@ export function BookCard({
             alt={`Book Cover: ${title}`}
             className='h-full w-full'
             width={256}
-            height={334}
+            height={256}
             style={{
-              aspectRatio: '256/334',
+              aspectRatio: '1/1',
               objectFit: 'cover',
             }}
           />
@@ -74,16 +74,9 @@ export function BookCard({
       </button>
       <div
         id='book-details-popover'
-        popover='manual'
-        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
+        popover='auto'
+        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-0 text-[#091231FF] md:max-w-xl'
       >
-        <button
-          popovertarget='book-details-popover'
-          popovertargetaction='hide'
-          className='ml-auto block rounded-lg p-2 hover:opacity-80 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-gray-400'
-        >
-          <XMarkIcon className='h-8 w-8 text-[#091231FF]' />
-        </button>
         <BookDetails
           id={id}
           title={title}
