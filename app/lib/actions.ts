@@ -34,6 +34,7 @@ export type State = {
     genre?: string[];
   };
   message?: string | null;
+  messageType?: 'success' | 'error';
   resetKey?: string | null;
 };
 
@@ -55,6 +56,7 @@ export async function createBook(
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to create book.',
+      messageType: 'error',
       resetKey: prevState.resetKey,
     };
   }
@@ -72,6 +74,10 @@ export async function createBook(
       imageUrl = uploadResult.url;
     } catch (error) {
       console.error('Failed to upload image:', error);
+      return {
+        message: 'Failed to upload image.',
+        messageType: 'error',
+      };
     }
   } else {
     imageUrl = null;
@@ -87,12 +93,30 @@ export async function createBook(
 
     return {
       resetKey: Date.now().toString(),
+      message: 'Book successfully created!',
+      messageType: 'success',
     };
   } catch (error) {
     console.error('Database Error:', error);
 
     return {
-      message: 'Database Error: Failed to create book.',
+      message: 'Failed to create book.',
+      messageType: 'error',
     };
+  }
+}
+
+export async function deleteBook(id: string) {
+  try {
+    await sql`DELETE
+                  FROM books
+                  WHERE id = ${id}`;
+
+    revalidatePath('/dashboard');
+
+    return { message: 'Deleted book.' };
+  } catch (error) {
+
+    return { message: 'Failed to delete book.' };
   }
 }
