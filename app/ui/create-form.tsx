@@ -16,11 +16,11 @@ function SubmitButton() {
   return (
     <div className='flex justify-center gap-4'>
       <Button
-        className='mt-6 flex w-36 justify-center text-lg font-semibold disabled:cursor-not-allowed disabled:opacity-60'
+        className='mt-6 flex w-36 justify-center bg-[#081a57] text-lg font-semibold text-gray-100'
         type='submit'
         disabled={pending}
       >
-        Save
+        {pending ? 'Adding a book' : 'Save'}
       </Button>
     </div>
   );
@@ -69,6 +69,7 @@ export default function Form() {
     'classics',
     'comics',
     'short',
+    'philosophy',
   ];
 
   return (
@@ -77,6 +78,9 @@ export default function Form() {
         <h1 className='mb-2 text-center text-2xl font-semibold text-[#091231FF]'>
           Create a new book
         </h1>
+        {state.message && (
+          <div className='mb-4 text-center text-green-500'>{state.message}</div>
+        )}
         <div className='w-full'>
           <div>
             <label
