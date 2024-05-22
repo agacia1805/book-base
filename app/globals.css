@@ -45,16 +45,17 @@ body::after {
   }
 }
 
-.glitter-bg {
-  background: linear-gradient(45deg, #77d1f8, #ff77ff, #7acdf1, #ff7eff);
-}
-
 .create-book-popover {
   transform: translateY(-80px);
   opacity: 0;
   transition-property: transform, opacity, display;
   transition-duration: 0.7s;
   transition-behavior: allow-discrete;
+}
+
+.create-book-popover::backdrop {
+  background: rgba(241, 236, 236, 0.25);
+  backdrop-filter: brightness(0.3);
 }
 
 .create-book-popover:popover-open {
