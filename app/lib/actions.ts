@@ -116,7 +116,75 @@ export async function deleteBook(id: string) {
 
     return { message: 'Deleted book.' };
   } catch (error) {
-
     return { message: 'Failed to delete book.' };
+  }
+}
+
+const UpdateBook = FormSchema.omit({ id: true, date: true });
+
+export async function updateBook(
+  id: string,
+  prevState: State,
+  formData: FormData
+) {
+  const validatedFields = CreateBook.safeParse({
+    title: formData.get('title'),
+    author: formData.get('author'),
+    description: formData.get('description'),
+    image: formData.get('image'),
+    status: formData.get('status'),
+    rating: formData.get('rating'),
+    genre: formData.getAll('genre'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to create book.',
+      messageType: 'error',
+      resetKey: prevState.resetKey,
+    };
+  }
+
+  const { title, author, description, image, status, rating, genre } =
+    validatedFields.data;
+  const genreString = [genre].join(',');
+  const ratingNumber = Number(rating);
+  let imageUrl;
+
+  if (image) {
+    try {
+      const uploadResult = await put(title, image, { access: 'public' });
+      imageUrl = uploadResult.url;
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+      return {
+        message: 'Failed to upload image.',
+        messageType: 'error',
+      };
+    }
+  } else {
+    imageUrl = null;
+  }
+
+  try {
+    await sql`
+            UPDATE books
+            SET title = ${title}, autho = ${author}, description = ${description}, image_url = ${imageUrl}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
+            WHERE id = ${id}
+        `;
+
+    revalidatePath('/dashboard');
+
+    return {
+      resetKey: Date.now().toString(),
+      message: 'Book successfully edited!',
+      messageType: 'success',
+    };
+  } catch (error) {
+    return {
+      message: 'Failed to edit book.',
+      messageType: 'error',
+    };
   }
 }

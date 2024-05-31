@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import { StarRating } from './star-rating';
 import { BookDetails } from './book-details';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import EditBookForm from './edit-form';
+import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import { IBookCardProps } from '@/app/lib/definitions';
 import { deleteBook } from '@/app/lib/actions';
 
@@ -20,6 +21,7 @@ export function BookCard({
   const genresArray = genre.split(',');
   const imageSrc = image || `/book-placeholder.png`;
   const popoverId = `${id}-popover`;
+  const popoverUpdateId = `${id}-update-popover`;
 
   return (
     <>
@@ -63,7 +65,7 @@ export function BookCard({
                 return (
                   <div
                     key={genre}
-                    className='rounded-md bg-gray-200 px-2 py-1 text-xs font-medium text-gray-700 opacity-90'
+                    className='rounded-md border bg-transparent px-2 py-1 text-xs font-medium text-gray-50 opacity-90'
                   >
                     {genre}
                   </div>
@@ -72,14 +74,22 @@ export function BookCard({
             </div>
           </div>
         </button>
-        <button
-          className='bg-gray-500 p-2 text-black'
-          onClick={() => {
-            deleteBook(id);
-          }}
-        >
-          Delete
-        </button>
+        <div className='flex bg-gray-700 px-4 py-2 opacity-70'>
+          <button
+            className='align-center flex w-full border-r'
+            onClick={() => {
+              deleteBook(id);
+            }}
+          >
+            <TrashIcon className='m-auto h-6 w-6 text-white' />
+          </button>
+          <button
+            className='align-center flex w-full'
+            popovertarget={popoverUpdateId}
+          >
+            <PencilSquareIcon className='m-auto h-6 w-6 text-white' />
+          </button>
+        </div>
       </div>
       <div
         id={popoverId}
@@ -87,6 +97,22 @@ export function BookCard({
         className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-0 text-[#091231FF] md:max-w-xl'
       >
         <BookDetails
+          id={id}
+          title={title}
+          author={author}
+          description={description}
+          status={status}
+          rating={rating}
+          genre={genre}
+          image={image}
+        />
+      </div>
+      <div
+        id={popoverUpdateId}
+        popover='auto'
+        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-0 text-[#091231FF] md:max-w-xl'
+      >
+        <EditBookForm
           id={id}
           title={title}
           author={author}
