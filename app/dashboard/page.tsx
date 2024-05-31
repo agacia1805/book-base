@@ -31,7 +31,7 @@ export default async function Page() {
         <div className='flex w-full flex-col gap-6'>
           <Button
             popovertarget='create-book-popover'
-            className='ml-auto text-lg font-semibold'
+            className='ml-auto bg-gray-100 text-lg font-semibold'
           >
             Add a book
           </Button>
@@ -59,7 +59,7 @@ export default async function Page() {
           <p className='text-xl'>You have no books saved</p>
           <Button
             popovertarget='create-book-popover'
-            className='text-lg font-semibold'
+            className='bg-gray-100 text-lg font-semibold'
           >
             Add a book
           </Button>
@@ -68,7 +68,7 @@ export default async function Page() {
       <div
         id='create-book-popover'
         popover='manual'
-        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
+        className='create-book-popover w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
       >
         <button
           popovertarget='create-book-popover'

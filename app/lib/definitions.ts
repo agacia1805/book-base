@@ -4,7 +4,7 @@ export type Book = {
   author: string;
   description: string;
   image_url: string;
-  status: string;
+  status: 'finished' | 'to read';
   rating: number;
   genre: string;
 };
@@ -15,7 +15,7 @@ export interface IBookCardProps {
   author: string;
   description: string;
   image: string;
-  status: string;
+  status: 'finished' | 'to read';
   rating: number;
   genre: string;
 }
