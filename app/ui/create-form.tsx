@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton() {
+function SubmitButton({ stateMessage }: { stateMessage?: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -20,7 +20,7 @@ function SubmitButton() {
         type='submit'
         disabled={pending}
       >
-        {pending ? 'Adding a book' : 'Save'}
+        {!pending && stateMessage ? 'Add more' : 'Save'}
       </Button>
     </div>
   );
@@ -41,6 +41,8 @@ export default function Form() {
     const file = event.target.files ? event.target.files[0] : null;
     setImage(file);
   };
+
+  console.log(state);
 
   const genres = [
     'memoir/autobiography',
@@ -78,10 +80,7 @@ export default function Form() {
         <h1 className='mb-2 text-center text-2xl font-semibold text-[#091231FF]'>
           Create a new book
         </h1>
-        {state.message && (
-          <div className='mb-4 text-center text-green-500'>{state.message}</div>
-        )}
-        <div className='w-full'>
+        <div className='max-h-[80vh] w-full'>
           <div>
             <label
               className='mb-2 mt-3 block text-xs font-medium'
@@ -277,7 +276,9 @@ export default function Form() {
             </div>
           </fieldset>
         </div>
-        <SubmitButton />
+        <SubmitButton
+          stateMessage={state?.messageType === 'success' && state.message}
+        />
       </div>
     </form>
   );
