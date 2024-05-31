@@ -56,6 +56,8 @@ body::after {
 .create-book-popover::backdrop {
   background: rgba(241, 236, 236, 0.25);
   backdrop-filter: brightness(0.3);
+  transition-property: transform, background-color, display;
+  transition-duration: 1.5s;
 }
 
 .create-book-popover:popover-open {
