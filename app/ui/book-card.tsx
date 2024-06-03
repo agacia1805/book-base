@@ -74,9 +74,9 @@ export function BookCard({
             </div>
           </div>
         </button>
-        <div className='flex bg-gray-700 px-4 py-2 opacity-70'>
+        <div className='flex bg-gray-700 opacity-70'>
           <button
-            className='align-center flex w-full border-r'
+            className='align-center flex w-full border-r px-4 py-2'
             onClick={() => {
               deleteBook(id);
             }}
@@ -84,7 +84,7 @@ export function BookCard({
             <TrashIcon className='m-auto h-6 w-6 text-white' />
           </button>
           <button
-            className='align-center flex w-full'
+            className='align-center flex w-full px-4 py-2'
             popovertarget={popoverUpdateId}
           >
             <PencilSquareIcon className='m-auto h-6 w-6 text-white' />
