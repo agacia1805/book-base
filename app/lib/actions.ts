@@ -170,7 +170,7 @@ export async function updateBook(
   try {
     await sql`
             UPDATE books
-            SET title = ${title}, autho = ${author}, description = ${description}, image_url = ${imageUrl}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
+            SET title = ${title}, author = ${author}, description = ${description}, image_url = ${imageUrl}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
             WHERE id = ${id}
         `;
 
@@ -182,6 +182,7 @@ export async function updateBook(
       messageType: 'success',
     };
   } catch (error) {
+    console.log(error)
     return {
       message: 'Failed to edit book.',
       messageType: 'error',
