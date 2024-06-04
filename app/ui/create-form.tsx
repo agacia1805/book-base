@@ -30,19 +30,12 @@ export default function Form() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createBook, initialState);
 
-  const [rating, setRating] = useState<number>(0);
   const [image, setImage] = useState<File | null>(null);
-
-  const onChangeRating = (newValue: number) => {
-    setRating(newValue);
-  };
 
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setImage(file);
   };
-
-  console.log(state);
 
   const genres = [
     'memoir/autobiography',

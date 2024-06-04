@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from './button';
 import { StarRating } from './star-rating';
-import { updateBook } from '@/app/lib/actions';
+// import { updateBook } from '@/app/lib/actions';
 import {
   CheckBadgeIcon,
   BookmarkSquareIcon,
@@ -37,18 +37,20 @@ export default function EditBookForm({
   genre,
 }: IBookCardProps) {
   const initialState = { message: null, errors: {} };
-  const updateBookWithId = updateBook.bind(null, id);
-  const [state, dispatch] = useFormState(updateBookWithId, initialState);
+//   const updateBookWithId = updateBook.bind(null, id);
+//   const [state, dispatch] = useFormState(updateBookWithId, initialState);
 
-  const [newRating, setNewRating] = useState<number>(0);
-  const [newImage, setNewImage] = useState<File | null>(null);
-
-  const onChangeRating = (newValue: number) => {
-    setNewRating(newValue);
-  };
+  const [newImage, setNewImage] = useState<File | string>("");
+  console.log(title)
+  console.log(author)
+  console.log(description)
+  console.log(image)
+  console.log(status)
+  console.log(rating)
+  console.log(typeof genre)
 
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
+    const file = event.target.files ? event.target.files[0] : image;
     setNewImage(file);
   };
 
@@ -81,6 +83,8 @@ export default function EditBookForm({
     'short',
     'philosophy',
   ];
+
+  console.log(state)
 
   return (
     <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>
@@ -262,21 +266,21 @@ export default function EditBookForm({
           <fieldset className='mt-3'>
             <legend className='mb-2 block text-xs font-medium'>Genre(s)</legend>
             <div className='h-[120px] overflow-y-scroll rounded-md border border-gray-200 bg-white p-2'>
-              {genres.map((genre) => (
-                <div key={genre} className='tag-checkbox'>
+              {genres.map((item) => (
+                <div key={item} className='tag-checkbox'>
                   <input
-                    id={genre}
+                    id={item}
                     name='genre'
                     type='checkbox'
-                    value={genre}
+                    value={item}
                     aria-describedby='genre-error'
-                    defaultChecked={genre === genre}
+                    defaultChecked={genre?.includes(item)}
                   />
                   <label
-                    htmlFor={genre}
+                    htmlFor={item}
                     className='m-1 flex cursor-pointer cursor-pointer select-none items-center rounded-full bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-300'
                   >
-                    {genre}
+                    {item}
                   </label>
                 </div>
               ))}
