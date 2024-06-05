@@ -182,7 +182,7 @@ export async function updateBook(
       messageType: 'success',
     };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       message: 'Failed to edit book.',
       messageType: 'error',

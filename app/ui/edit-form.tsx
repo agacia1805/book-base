@@ -40,14 +40,14 @@ export default function EditBookForm({
   const updateBookWithId = updateBook.bind(null, id);
   const [state, dispatch] = useFormState(updateBookWithId, initialState);
 
-  const [newImage, setNewImage] = useState<File | string>("");
-  console.log(title)
-  console.log(author)
-  console.log(description)
-  console.log(image)
-  console.log(status)
-  console.log(rating)
-  console.log(typeof genre)
+  const [newImage, setNewImage] = useState<File | string>('');
+  console.log(title);
+  console.log(author);
+  console.log(description);
+  console.log(image);
+  console.log(status);
+  console.log(rating);
+  console.log(typeof genre);
 
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : image;
@@ -84,7 +84,7 @@ export default function EditBookForm({
     'philosophy',
   ];
 
-  console.log(state)
+  console.log(state);
 
   return (
     <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>
