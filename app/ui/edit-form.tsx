@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from './button';
 import { StarRating } from './star-rating';
-// import { updateBook } from '@/app/lib/actions';
+import { updateBook } from '@/app/lib/actions';
 import {
   CheckBadgeIcon,
   BookmarkSquareIcon,
@@ -37,8 +37,8 @@ export default function EditBookForm({
   genre,
 }: IBookCardProps) {
   const initialState = { message: null, errors: {} };
-//   const updateBookWithId = updateBook.bind(null, id);
-//   const [state, dispatch] = useFormState(updateBookWithId, initialState);
+  const updateBookWithId = updateBook.bind(null, id);
+  const [state, dispatch] = useFormState(updateBookWithId, initialState);
 
   const [newImage, setNewImage] = useState<File | string>("");
   console.log(title)
@@ -187,7 +187,6 @@ export default function EditBookForm({
               className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
                                file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
                                file:py-2 file:font-semibold file:text-violet-700'
-              defaultValue={image}
             />
           </div>
           <div className='mt-4'>

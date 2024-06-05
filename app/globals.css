@@ -4,6 +4,7 @@
 
 body {
   background: linear-gradient(to bottom, transparent, #140a42) #0a071a;
+  scrollbar-width: thin;
 }
 
 body::before {
@@ -43,6 +44,10 @@ body::after {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }
 
 .create-book-popover {
