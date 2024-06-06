@@ -141,19 +141,19 @@ export default function EditBookForm({
             >
               Book Cover
             </label>
-        <input
-                     type='file'
-                     id='image'
-                     name='image'
-                     accept='image/*'
-                     onChange={onChangeImage}
-                     className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
+            <input
+              type='file'
+              id='image'
+              name='image'
+              accept='image/*'
+              onChange={onChangeImage}
+              className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
                                       file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
                                       file:py-2 file:font-semibold file:text-violet-700'
-                   />
-                   {!isImageChanged && image && (
-                     <img src={image} alt='Current book cover' className='mt-2 h-32' />
-                   )}
+            />
+            {!isImageChanged && image && (
+              <img src={image} alt='Current book cover' className='mt-2 h-32' />
+            )}
           </div>
           <div className='mt-4'>
             <label

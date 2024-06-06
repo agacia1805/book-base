@@ -147,7 +147,7 @@ export async function updateBook(
   }
 
   const { title, author, description, image, status, rating, genre } =
-      validatedFields.data;
+    validatedFields.data;
   const genreString = genre.join(',');
   const ratingNumber = Number(rating);
   let imageUrl = null;
@@ -187,7 +187,7 @@ export async function updateBook(
       message: 'Book successfully edited!',
       messageType: 'success',
     };
-  }  catch (error) {
+  } catch (error) {
     console.log(error);
     return {
       message: 'Failed to edit book.',
