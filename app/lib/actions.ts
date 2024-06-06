@@ -147,12 +147,12 @@ export async function updateBook(
   }
 
   const { title, author, description, image, status, rating, genre } =
-    validatedFields.data;
-  const genreString = [genre].join(',');
+      validatedFields.data;
+  const genreString = genre.join(',');
   const ratingNumber = Number(rating);
-  let imageUrl;
+  let imageUrl = null;
 
-  if (image) {
+  if (image instanceof File && image?.size !== 0) {
     try {
       const uploadResult = await put(title, image, { access: 'public' });
       imageUrl = uploadResult.url;
@@ -163,16 +163,22 @@ export async function updateBook(
         messageType: 'error',
       };
     }
-  } else {
-    imageUrl = null;
   }
 
   try {
-    await sql`
-            UPDATE books
-            SET title = ${title}, author = ${author}, description = ${description}, image_url = ${imageUrl}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
-            WHERE id = ${id}
-        `;
+    if (imageUrl) {
+      await sql`
+        UPDATE books
+        SET title = ${title}, author = ${author}, description = ${description}, image_url = ${imageUrl}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
+        WHERE id = ${id}
+      `;
+    } else {
+      await sql`
+        UPDATE books
+        SET title = ${title}, author = ${author}, description = ${description}, status = ${status}, rating = ${ratingNumber}, genre = ${genreString}
+        WHERE id = ${id}
+      `;
+    }
 
     revalidatePath('/dashboard');
 
@@ -181,7 +187,7 @@ export async function updateBook(
       message: 'Book successfully edited!',
       messageType: 'success',
     };
-  } catch (error) {
+  }  catch (error) {
     console.log(error);
     return {
       message: 'Failed to edit book.',

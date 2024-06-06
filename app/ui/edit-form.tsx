@@ -40,17 +40,10 @@ export default function EditBookForm({
   const updateBookWithId = updateBook.bind(null, id);
   const [state, dispatch] = useFormState(updateBookWithId, initialState);
 
-  const [newImage, setNewImage] = useState<File | string>('');
-  console.log(title);
-  console.log(author);
-  console.log(description);
-  console.log(image);
-  console.log(status);
-  console.log(rating);
-  console.log(typeof genre);
+  const [newImage, setNewImage] = useState<File | null>(null);
 
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : image;
+    const file = event.target.files ? event.target.files[0] : null;
     setNewImage(file);
   };
 
@@ -83,8 +76,6 @@ export default function EditBookForm({
     'short',
     'philosophy',
   ];
-
-  console.log(state);
 
   return (
     <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>
@@ -179,15 +170,18 @@ export default function EditBookForm({
               Book Cover
             </label>
             <input
-              type='file'
-              id='image'
-              name='image'
-              accept='image/*'
-              onChange={onChangeImage}
-              className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
-                               file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
-                               file:py-2 file:font-semibold file:text-violet-700'
-            />
+                        type='file'
+                        id='image'
+                        name='image'
+                        accept='image/*'
+                        onChange={onChangeImage}
+                        className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
+                                         file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
+                                         file:py-2 file:font-semibold file:text-violet-700'
+                      />
+                      {image && !newImage && (
+                        <img src={image} alt='Current book cover' className='mt-2 h-32' />
+                      )}
           </div>
           <div className='mt-4'>
             <label
