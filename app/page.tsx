@@ -12,10 +12,10 @@ export default function Page() {
             <span className='block'>Store your favourite books today. </span>
           </p>
           <div className='flex justify-end gap-4'>
-            <Button>
+            <Button className='bg-gray-100'>
               <Link href='/login'>Log in</Link>
             </Button>
-            <Button>
+            <Button className='bg-gray-100'>
               <Link href='/signup'>Sign up</Link>
             </Button>
           </div>
