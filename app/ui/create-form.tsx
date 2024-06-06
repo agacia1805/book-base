@@ -8,9 +8,10 @@ import {
   CheckBadgeIcon,
   BookmarkSquareIcon,
 } from '@heroicons/react/24/outline';
+import { genres } from '@/app/constants/genres';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton({ stateMessage }: { stateMessage?: string }) {
+function SubmitButton({ stateMessage }: { stateMessage?: string | null }) {
   const { pending } = useFormStatus();
 
   return (
@@ -36,36 +37,6 @@ export default function Form() {
     const file = event.target.files ? event.target.files[0] : null;
     setImage(file);
   };
-
-  const genres = [
-    'memoir/autobiography',
-    'nonfiction',
-    'historical fiction',
-    'fantasy',
-    'science fiction',
-    'dystopian',
-    'action',
-    'adventure',
-    'mystery',
-    'horror',
-    'thriller',
-    'romance',
-    'poetry',
-    'lgbtq+',
-    'microrealism',
-    'young adult',
-    'new adult',
-    'biography',
-    'art',
-    'history',
-    'travel',
-    'true crime',
-    'children',
-    'classics',
-    'comics',
-    'short',
-    'philosophy',
-  ];
 
   return (
     <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>

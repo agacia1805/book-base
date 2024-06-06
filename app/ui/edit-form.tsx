@@ -8,6 +8,7 @@ import {
   CheckBadgeIcon,
   BookmarkSquareIcon,
 } from '@heroicons/react/24/outline';
+import { genres } from '@/app/constants/genres';
 import { useFormState, useFormStatus } from 'react-dom';
 
 function SubmitButton({ stateMessage }: { stateMessage?: string }) {
@@ -39,43 +40,14 @@ export default function EditBookForm({
   const initialState = { message: null, errors: {} };
   const updateBookWithId = updateBook.bind(null, id);
   const [state, dispatch] = useFormState(updateBookWithId, initialState);
-
   const [newImage, setNewImage] = useState<File | null>(null);
+  const [isImageChanged, setIsImageChanged] = useState(false);
 
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setNewImage(file);
+    setIsImageChanged(!!file);
   };
-
-  const genres = [
-    'memoir/autobiography',
-    'nonfiction',
-    'historical fiction',
-    'fantasy',
-    'science fiction',
-    'dystopian',
-    'action',
-    'adventure',
-    'mystery',
-    'horror',
-    'thriller',
-    'romance',
-    'poetry',
-    'lgbtq+',
-    'microrealism',
-    'young adult',
-    'new adult',
-    'biography',
-    'art',
-    'history',
-    'travel',
-    'true crime',
-    'children',
-    'classics',
-    'comics',
-    'short',
-    'philosophy',
-  ];
 
   return (
     <form className='p-1 md:p-6' action={dispatch} key={state?.resetKey}>
@@ -169,19 +141,19 @@ export default function EditBookForm({
             >
               Book Cover
             </label>
-            <input
-                        type='file'
-                        id='image'
-                        name='image'
-                        accept='image/*'
-                        onChange={onChangeImage}
-                        className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
-                                         file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
-                                         file:py-2 file:font-semibold file:text-violet-700'
-                      />
-                      {image && !newImage && (
-                        <img src={image} alt='Current book cover' className='mt-2 h-32' />
-                      )}
+        <input
+                     type='file'
+                     id='image'
+                     name='image'
+                     accept='image/*'
+                     onChange={onChangeImage}
+                     className='block w-full text-sm text-gray-900 file:mr-4 file:cursor-pointer file:rounded-full
+                                      file:border-0 file:bg-violet-100 file:bg-violet-50 file:px-4
+                                      file:py-2 file:font-semibold file:text-violet-700'
+                   />
+                   {!isImageChanged && image && (
+                     <img src={image} alt='Current book cover' className='mt-2 h-32' />
+                   )}
           </div>
           <div className='mt-4'>
             <label
