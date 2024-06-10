@@ -12,7 +12,7 @@ const FormSchema = z.object({
   title: z.string().min(1, { message: 'Please provide a title' }),
   author: z.string().min(1, { message: 'Please provide an author' }),
   description: z.string().min(1, { message: 'Please provide a description' }),
-  image: z.any(),
+  image: z.custom<File>(),
   status: z.enum(['finished', 'to read'], {
     invalid_type_error: 'Please select a status.',
   }),
