@@ -9,6 +9,7 @@ import {
   BookmarkSquareIcon,
 } from '@heroicons/react/24/outline';
 import { genres } from '@/app/constants/genres';
+import { IBookCardProps } from '@/app/lib/definitions';
 import { useFormState, useFormStatus } from 'react-dom';
 
 function SubmitButton({ stateMessage }: { stateMessage?: string }) {

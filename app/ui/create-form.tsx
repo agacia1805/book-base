@@ -11,7 +11,7 @@ import {
 import { genres } from '@/app/constants/genres';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton({ stateMessage }: { stateMessage?: string | null }) {
+function SubmitButton({ stateMessage }: { stateMessage?: booleans }) {
   const { pending } = useFormStatus();
 
   return (
@@ -241,7 +241,7 @@ export default function Form() {
           </fieldset>
         </div>
         <SubmitButton
-          stateMessage={state?.messageType === 'success' && state.message}
+          stateMessage={state?.messageType === 'success'}
         />
       </div>
     </form>
