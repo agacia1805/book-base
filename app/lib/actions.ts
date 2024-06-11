@@ -126,7 +126,7 @@ export async function updateBook(
   id: string,
   prevState: State,
   formData: FormData
-) {
+): Promise<State> {
   const validatedFields = CreateBook.safeParse({
     title: formData.get('title'),
     author: formData.get('author'),

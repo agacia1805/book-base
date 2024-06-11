@@ -12,7 +12,7 @@ import { genres } from '@/app/constants/genres';
 import { IBookCardProps } from '@/app/lib/definitions';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton({ stateMessage }: { stateMessage?: string }) {
+function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
@@ -261,9 +261,7 @@ export default function EditBookForm({
             </div>
           </fieldset>
         </div>
-        <SubmitButton
-          stateMessage={state?.messageType === 'success' && state.message}
-        />
+        <SubmitButton />
       </div>
     </form>
   );
