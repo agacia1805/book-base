@@ -11,13 +11,13 @@ import {
 import { genres } from '@/app/constants/genres';
 import { useFormState, useFormStatus } from 'react-dom';
 
-function SubmitButton({ stateMessage }: { stateMessage?: booleans }) {
+function SubmitButton({ stateMessage }: { stateMessage?: boolean }) {
   const { pending } = useFormStatus();
 
   return (
     <div className='flex justify-center gap-4'>
       <Button
-        className='mt-6 flex w-36 justify-center bg-[#081a57] text-lg font-semibold text-gray-100'
+        className='mt-6 flex w-36 justify-center bg-[#081a57] text-lg font-semibold text-gray-100 disabled:cursor-not-allowed disabled:opacity-60'
         type='submit'
         disabled={pending}
       >
@@ -240,9 +240,7 @@ export default function Form() {
             </div>
           </fieldset>
         </div>
-        <SubmitButton
-          stateMessage={state?.messageType === 'success'}
-        />
+        <SubmitButton stateMessage={state?.messageType === 'success'} />
       </div>
     </form>
   );
