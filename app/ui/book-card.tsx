@@ -110,7 +110,7 @@ export function BookCard({
       <div
         id={popoverUpdateId}
         popover='auto'
-        className='create-book-popover max-h-[90vh] w-11/12 rounded-lg bg-gray-100 p-0 text-[#091231FF] md:max-w-xl'
+        className='create-book-popover w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
       >
         <EditBookForm
           id={id}
