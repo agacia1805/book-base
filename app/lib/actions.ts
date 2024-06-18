@@ -114,9 +114,9 @@ export async function deleteBook(id: string) {
 
     revalidatePath('/dashboard');
 
-    return { message: 'Deleted book.' };
+    return { message: 'Deleted book.', messageType: 'success', };
   } catch (error) {
-    return { message: 'Failed to delete book.' };
+    return { message: 'Failed to delete book.', messageType: 'error', };
   }
 }
 

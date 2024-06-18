@@ -141,7 +141,7 @@ export default function Form() {
           <div className='mt-4'>
             <label
               className='mb-2 mt-3 block text-xs font-medium'
-              htmlFor='description'
+              htmlFor='status'
             >
               Book status
             </label>
@@ -149,7 +149,7 @@ export default function Form() {
               <div className='flex gap-4'>
                 <div className='flex items-center'>
                   <input
-                    id='finished'
+                    id='bookFinished'
                     name='status'
                     type='radio'
                     value='finished'
@@ -157,7 +157,7 @@ export default function Form() {
                     aria-describedby='status-error'
                   />
                   <label
-                    htmlFor='finished'
+                    htmlFor='bookFinished'
                     className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-blue-300 px-3 py-1.5 text-xs font-medium'
                   >
                     Finished <CheckBadgeIcon className='h-4 w-4' />
@@ -165,7 +165,7 @@ export default function Form() {
                 </div>
                 <div className='flex items-center'>
                   <input
-                    id='to read'
+                    id='bookToRead'
                     name='status'
                     type='radio'
                     value='to read'
@@ -173,7 +173,7 @@ export default function Form() {
                     aria-describedby='status-error'
                   />
                   <label
-                    htmlFor='to read'
+                    htmlFor='bookToRead'
                     className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-pink-300 px-3 py-1.5 text-xs font-medium'
                   >
                     To read <BookmarkSquareIcon className='h-4 w-4' />
@@ -215,14 +215,14 @@ export default function Form() {
               {genres.map((genre) => (
                 <div key={genre} className='tag-checkbox'>
                   <input
-                    id={genre}
+                    id={`book-${genre}`}
                     name='genre'
                     type='checkbox'
                     value={genre}
                     aria-describedby='genre-error'
                   />
                   <label
-                    htmlFor={genre}
+                    htmlFor={`book-${genre}`}
                     className='m-1 flex cursor-pointer cursor-pointer select-none items-center rounded-full bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-300'
                   >
                     {genre}
