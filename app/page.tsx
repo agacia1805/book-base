@@ -1,32 +1,76 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Form from '@/app/ui/create-form';
 import { Button } from '@/app/ui/button';
+import { BookCard } from '@/app/ui/book-card';
+import { PlusIcon, BookOpenIcon } from '@heroicons/react/24/outline';
+import { fetchBooks } from '@/app/lib/data';
+import { Metadata } from 'next';
 
-export default function Page() {
+declare module 'react' {
+  interface HTMLAttributes<T> {
+    popover?: string;
+  }
+}
+
+declare module 'react' {
+  interface ButtonHTMLAttributes<T> {
+    popovertarget?: string;
+    popovertargetaction?: string;
+  }
+}
+
+export const metadata: Metadata = {
+  title: 'Dashboard page to store your books',
+};
+
+export default async function Page() {
+  const books = await fetchBooks();
+
   return (
-    <main className='mx-auto my-0 flex p-6'>
-      <div className='mt-4 flex grow flex-col gap-4 md:flex-row'>
-        <div className='flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-3/5'>
-          <p className='text-right text-xl text-gray-300 md:text-3xl md:leading-normal'>
-            <strong className='title'>Welcome to BookBase.</strong>
-            <span className='block'>Store your favourite books today. </span>
-          </p>
-          <div className='flex justify-end gap-4'>
-            <Button className='bg-gray-100'>
-              <Link href='/login'>Log in</Link>
-            </Button>
-            <Button className='bg-gray-100'>
-              <Link href='/signup'>Sign up</Link>
-            </Button>
+    <main className='flex w-full p-6'>
+      {books?.length ? (
+        <div className='flex w-full flex-col gap-6'>
+          <Button
+            popovertarget='create-book-popover'
+            className='ml-auto bg-gray-100 text-lg font-semibold'
+          >
+            Add a book
+          </Button>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+            {books.map((book) => {
+              return (
+                <BookCard
+                  key={book.id}
+                  id={book.id}
+                  title={book.title}
+                  author={book.author}
+                  description={book.description}
+                  status={book.status}
+                  rating={book.rating}
+                  genre={book.genre}
+                  image={book.image_url}
+                />
+              );
+            })}
           </div>
         </div>
-        <Image
-          src='/image.svg'
-          width={700}
-          height={760}
-          className='z-10 hidden md:block'
-          alt='Screenshots of the dashboard project showing desktop version'
-        />
+      ) : (
+        <div className='flex w-full flex-col items-center justify-center gap-6 text-white'>
+          <BookOpenIcon className='h-12 w-12' />
+          <p className='text-xl'>You have no books saved</p>
+          <Button
+            popovertarget='create-book-popover'
+            className='bg-gray-100 text-lg font-semibold'
+          >
+            Add a book
+          </Button>
+        </div>
+      )}
+      <div
+        id='create-book-popover'
+        popover='auto'
+        className='create-book-popover w-11/12 rounded-lg bg-gray-100 p-2 text-[#091231FF] md:w-4/12'
+      >
+        <Form />
       </div>
     </main>
   );
